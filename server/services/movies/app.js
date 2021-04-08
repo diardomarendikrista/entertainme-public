@@ -2,7 +2,7 @@ const express = require('express');
 const { connect } = require('./config/mongodb');
 
 const app = express();
-const port = 3000;
+const port = 4001;
 const router = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
 
@@ -14,10 +14,10 @@ app.use(errorHandler);
 
 connect((connected) => {
   if (connected) {
-    console.log(`mongodb connected`);
+    console.log(`mongodb movies connected`);
 
     app.listen(port, () => {
-      console.log(`server running at port ${port}`);
+      console.log(`server movies running at port ${port}`);
     })
   } 
   else console.log(`error: mongodb cannot connected`);

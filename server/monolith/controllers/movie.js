@@ -4,12 +4,9 @@ class MovieController {
   static getMovies(req, res, next) {
     Movie.find()
       .then(movies => {
-        res.status(200).json(movies);
+        res.status(200).json({ movies });
       })
-      .catch(err => {
-        console.log(err)
-        res.status(500).json(err);
-      })
+      .catch(next)
   }
 
   static getMovieById(req, res, next) {
@@ -18,15 +15,15 @@ class MovieController {
     Movie.findOne(id)
       .then(movie => {
         if (movie) {
-          res.status(200).json(movie);
+          res.status(200).json({ movie });
         } else {
-          res.status(404).json({ message: `data not found`});
+          next({
+            code: 404,
+            message: `data not found`
+          })
         }
       })
-      .catch(err => {
-        console.log(err)
-        res.status(500).json(err);
-      })
+      .catch(next)
   }
 
   static addMovie(req, res, next) {
@@ -40,12 +37,9 @@ class MovieController {
 
     Movie.create(newMovie)
       .then(movie => {
-        res.status(201).json(movie.ops);
+        res.status(201).json({ movie: movie.ops });
       })
-      .catch(err => {
-        console.log(err)
-        res.status(500).json(err);
-      })
+      .catch(next)
   }
 
   static editMovie(req, res, next) {
@@ -65,16 +59,13 @@ class MovieController {
         if (response.matchedCount) {
           return Movie.findOne(id)
         } else {
-          res.status(404).json({ message: `data not found`});
+          throw { code: 404, message: `data not found` }
         }
       })
       .then(movie => {
-        res.status(200).json(movie);
+        res.status(200).json({ movie });
       })
-      .catch(err => {
-        console.log(err)
-        res.status(500).json(err);
-      })
+      .catch(next)
   }
 
   static deleteMovie(req, res, next) {
@@ -85,13 +76,13 @@ class MovieController {
         if (response.deletedCount) {
           res.status(200).json({ message: `delete success`});
         } else {
-          res.status(404).json({ message: `data not found`});
+          next({
+            code: 404,
+            message: `data not found`
+          })
         }
       })
-      .catch(err => {
-        console.log(err)
-        res.status(500).json(err);
-      })
+      .catch(next)
   }
 
 }

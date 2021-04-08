@@ -56,7 +56,7 @@ class TvSeriesController {
 
     TvSeries.update(id, editTvSeries)
       .then(response => {
-        if (response.matchedCount) {
+        if (response.matchedCount > 0) {
           return TvSeries.findOne(id)
         } else {
           throw { code: 404, message: `data not found` }

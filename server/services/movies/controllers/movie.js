@@ -1,21 +1,21 @@
-const TvSeries = require('../models/tvSeries');
+const Movie = require('../models/movie');
 
-class TvSeriesController {
-  static getTvSeries(req, res, next) {
-    TvSeries.find()
-      .then(tvSeries => {
-        res.status(200).json({ tvSeries });
+class MovieController {
+  static getMovies(req, res, next) {
+    Movie.find()
+      .then(movies => {
+        res.status(200).json({ movies });
       })
       .catch(next)
   }
 
-  static getTvSeriesById(req, res, next) {
+  static getMovieById(req, res, next) {
     const { id } = req.params;
 
-    TvSeries.findOne(id)
-      .then(tvSeries => {
-        if (tvSeries) {
-          res.status(200).json({ tvSeries });
+    Movie.findOne(id)
+      .then(movie => {
+        if (movie) {
+          res.status(200).json({ movie });
         } else {
           next({
             code: 404,
@@ -26,8 +26,8 @@ class TvSeriesController {
       .catch(next)
   }
 
-  static addTvSeries(req, res, next) {
-    const newTvSeries = {
+  static addMovie(req, res, next) {
+    const newMovie = {
       title: req.body.title,
       overview: req.body.overview,
       poster_path: req.body.poster_path,
@@ -35,16 +35,16 @@ class TvSeriesController {
       tags: req.body.tags
     }
 
-    TvSeries.create(newTvSeries)
-      .then(tvSeries => {
-        res.status(201).json({ tvSeries: tvSeries.ops });
+    Movie.create(newMovie)
+      .then(movie => {
+        res.status(201).json({ movie: movie.ops });
       })
       .catch(next)
   }
 
-  static editTvSeries(req, res, next) {
+  static editMovie(req, res, next) {
     const { id } = req.params;
-    const editTvSeries = {
+    const editMovie = {
       $set: {
         title: req.body.title,
         overview: req.body.overview,
@@ -54,24 +54,24 @@ class TvSeriesController {
       },
     }
 
-    TvSeries.update(id, editTvSeries)
+    Movie.update(id, editMovie)
       .then(response => {
-        if (response.matchedCount) {
-          return TvSeries.findOne(id)
+        if (response.matchedCount > 0) {
+          return Movie.findOne(id)
         } else {
           throw { code: 404, message: `data not found` }
         }
       })
-      .then(tvSeries => {
-        res.status(200).json({ tvSeries });
+      .then(movie => {
+        res.status(200).json({ movie });
       })
       .catch(next)
   }
 
-  static deleteTvSeries(req, res, next) {
+  static deleteMovie(req, res, next) {
     const { id } = req.params;
 
-    TvSeries.delete(id)
+    Movie.delete(id)
       .then(response => {
         if (response.deletedCount) {
           res.status(200).json({ message: `delete success`});
@@ -84,6 +84,7 @@ class TvSeriesController {
       })
       .catch(next)
   }
+
 }
 
-module.exports = TvSeriesController;
+module.exports = MovieController;
