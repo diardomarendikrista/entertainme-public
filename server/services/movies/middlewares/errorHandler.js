@@ -18,7 +18,6 @@ function errorHandler(err, req, res, next) {
       message: err.message
     });
   } else if (err.code == '404') {
-    console.log(`masuk?`);
     res.status(404).json({
       status: 'error',
       code: 404,
