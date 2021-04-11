@@ -1,0 +1,101 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.btn-cancel {
+  margin-left: 5px;
+}
+
+.card {
+  transition: 300ms;
+}
+
+.card:hover {
+  background-color: #BCC1C7;
+  box-shadow: 0 0 10px 1px #2C3740;
+  transition: 500ms;
+}
+
+.card:hover .card-title {
+  font-weight: bold;
+  transform: scale(1.15);
+  transition: 400ms;
+}
+
+.card:hover .card-img {
+  transform: scale(1.15);
+  border-radius: 0px;
+  transition: 500ms;
+}
+
+.card:hover .option-btn {
+  visibility: visible;
+}
+
+.card-img-zoom {
+  height: 300px; /* [1.1] Set it as per your need */
+  overflow: hidden; /* [1.2] Hide the overflowing of child elements */
+  transition: 500ms;
+}
+
+.card-img {
+  overflow: hidden;
+  height: 300px;
+  transform: scale(1);
+  transition: 300ms;
+}
+
+.card-img:hover {
+  cursor: pointer;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  transition: 400ms;
+}
+
+.card-title:hover {
+  cursor: pointer;
+}
+
+.card-text {
+  position: inherit;
+  bottom: 0px;
+  font-size: 15px;
+  text-align: left;
+}
+
+.option-btn {
+  padding: 7px 13px;
+  visibility: hidden;
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  background-color: #000;
+  opacity: 0.8;
+  border-radius: 10px;
+}
+
+.input-form {
+  width: 550px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 1px #2C3740;
+}
+
+.option-btn:hover {
+  cursor: pointer;
+}
