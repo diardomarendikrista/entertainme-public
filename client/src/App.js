@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Navbar from './components/NavBar';
 import AddMovie from './pages/AddMovie';
 import EditMovie from './pages/EditMovie';
+import Favorites from './pages/Favorites';
 
 function App() {
   return (
@@ -17,10 +18,13 @@ function App() {
       <ApolloProvider client={client} >
       <Navbar />
         <Switch>
+          <Route path="/favorites">
+            <Favorites />
+          </Route>
           <Route path="/addmovie">
             <AddMovie />
           </Route>
-          <Route path="/editmovie/:_id">
+          <Route path="/editmovie/:id">
             <EditMovie />
           </Route>
           <Route path="/">

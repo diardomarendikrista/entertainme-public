@@ -1,64 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from "react-router-dom";
-import { useMutation, useQuery, gql } from '@apollo/client';
-
-const GET_ENTERTAINME = gql`
-  query Entertainme {
-    Movies {
-      _id
-      title
-      overview
-      poster_path
-      popularity
-      tags
-    }
-    tvSeries {
-      _id
-      title
-      overview
-      poster_path
-      popularity
-      tags
-    }
-  }
-`
-
-const GET_MOVIE_ID = gql`
-  query GetMovie($_id: ID) {
-    Movie(_id: $_id) {
-      _id
-      title
-      overview
-      poster_path
-      popularity
-      tags
-    }
-  }
-`
-
-const UPDATE_MOVIE = gql`
-  mutation editMovie($id: ID, $updateMovie: MovieInput) {
-    editMovie(_id: $id, updateMovie: $updateMovie) {
-      _id
-      title
-      overview
-      poster_path
-      popularity
-      tags
-    }
-  }
-`
+import { useMutation, useQuery } from '@apollo/client';
+import {
+  GET_ENTERTAINME,
+  GET_MOVIE_ID,
+  UPDATE_MOVIE
+ } from '../queries';
 
 export default function EditMovie () {  
-  let { _id } = useParams();
+  let { id } = useParams();
   const [title, setTitle] = useState('');
   const [overview, setOverview] = useState('');
   const [posterpath, setPosterpath] = useState('');
   const [popularity, setPopularity] = useState('');
   const [tags, setTags] = useState('');
-  console.log(_id);
 
-  const { data , loading } = useQuery(GET_MOVIE_ID);
+  const { data , loading } = useQuery(GET_MOVIE_ID, {
+    variables: {
+      id
+    }
+  });
   const [
     editMovie,
     // eslint-disable-next-line
@@ -68,7 +29,13 @@ export default function EditMovie () {
   });
 
   useEffect(_ => {
-    console.log(data, 'ini dataaa');
+    if (data) {
+      setTitle(data.Movie.title);
+      setOverview(data.Movie.overview);
+      setPosterpath(data.Movie.poster_path);
+      setPopularity(data.Movie.popularity);
+      setTags(data.Movie.tags.join('; '));
+    }
   }, [data])
 
   const history = useHistory();
@@ -94,7 +61,8 @@ export default function EditMovie () {
 
     editMovie({
       variables: {
-        newMovie: movie
+        id,
+        updateMovie: movie
       }
     })
 

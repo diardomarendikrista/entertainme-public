@@ -1,38 +1,15 @@
 import React from 'react'
 import { Card } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
-import { Trash, PencilSquare } from 'react-bootstrap-icons';
-import { useMutation, gql } from '@apollo/client';
+import { Trash, PencilSquare, BookmarkStarFill } from 'react-bootstrap-icons';
+import { useMutation } from '@apollo/client';
 import Swal from 'sweetalert2';
-
-const GET_ENTERTAINME = gql`
-  query Entertainme {
-    Movies {
-      _id
-      title
-      overview
-      poster_path
-      popularity
-      tags
-    }
-    tvSeries {
-      _id
-      title
-      overview
-      poster_path
-      popularity
-      tags
-    }
-  }
-`
-
-const DELETE_MOVIE = gql`
-  mutation deleteMovie($_id: ID) {
-    deleteMovie(_id: $_id) {
-      message
-    }
-  }
-`
+import { cache } from '../config/graphql'
+import {
+  GET_ENTERTAINME,
+  DELETE_MOVIE,
+  GET_FAVORITES
+ } from '../queries';
 
 export default function MovieCard (props) {
   const { movie } = props;
@@ -79,6 +56,33 @@ export default function MovieCard (props) {
     history.push(`/editmovie/${id}`);
   }
 
+  const setFavourite = (movie) => {
+    const existingData = cache.readQuery({
+      query: GET_FAVORITES
+    })
+
+    const alreadyFavorited = existingData.favorites.find(favorite => favorite._id === movie._id)
+    if (!alreadyFavorited) {
+      cache.writeQuery({
+        query: GET_FAVORITES,
+        data: {
+          favorites: [movie, ...existingData.favorites]
+        }, 
+      });
+      Swal.fire(
+        'Favorited!',
+        `${movie.title} added to your favorites!`,
+        'success'
+      );
+    } else {
+      Swal.fire(
+        '',
+        `${movie.title} already on your favorites!`,
+        'info'
+      );
+    }
+  }
+
   return (
     <>
       <Card className="card m-1" style={{ width: '16rem' }}>
@@ -86,12 +90,17 @@ export default function MovieCard (props) {
           <Card.Img className="card-img" variant="top" src={movie.poster_path} />
         </div>
         <Card.Body>
-          <Card.Title className="card-title">{ movie.title }</Card.Title>
+          <Card.Title><span className="card-title">{ movie.title }</span></Card.Title>
           <Card.Text className="card-text">
-            popularity : { movie.popularity } <br/>
-            tags : { formatTags(movie.tags) } <br/>
-            overview : { movie.overview } <br/>
+            <span className="card-text-param" >Tags</span> : { formatTags(movie.tags) } <br/>
+            <span className="card-text-param" >Overview</span> : { movie.overview } <br/>
           </Card.Text>
+          <div className="popularity-tag">
+            { movie.popularity }
+          </div>
+          <div className="btn-favourite">
+            <BookmarkStarFill onClick={() => setFavourite(movie)} style={{ fontSize:50, color:'#DA1F2C' }} />
+          </div>
           <div className="option-btn">
             <PencilSquare onClick={() => editMovie(movie._id)} style={{ fontSize:25, marginRight:15, color:'cyan' }}/>
             <Trash onClick={() => delMovie(movie._id)} style={{ fontSize:25, color:'red' }}/>

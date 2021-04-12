@@ -1,40 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
-import { useMutation, gql } from '@apollo/client';
-
-const GET_ENTERTAINME = gql`
-  query Entertainme {
-    Movies {
-      _id
-      title
-      overview
-      poster_path
-      popularity
-      tags
-    }
-    tvSeries {
-      _id
-      title
-      overview
-      poster_path
-      popularity
-      tags
-    }
-  }
-`
-
-const ADD_MOVIE = gql`
-  mutation addMovie($newMovie: MovieInput) {
-    addMovie(newMovie: $newMovie) {
-      _id
-      title
-      overview
-      poster_path
-      popularity
-      tags
-    }
-  }
-`
+import { useMutation } from '@apollo/client';
+import {
+  GET_ENTERTAINME,
+  ADD_MOVIE
+ } from '../queries';
 
 export default function AddMovie (props) {  
   const [title, setTitle] = useState('');

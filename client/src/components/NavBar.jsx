@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import { useHistory } from "react-router-dom";
-import { StarFill } from 'react-bootstrap-icons';
+import { StarFill, HouseFill } from 'react-bootstrap-icons';
 import logo from '../assets/logo.png';
 
 export default function NavBar () {
@@ -11,24 +11,27 @@ export default function NavBar () {
     event.preventDefault();
     history.push('/');
   }
+  
+  const goToFavorites = (event) => {
+    event.preventDefault();
+    history.push('/favorites');
+  }
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" style={{ marginBottom: '20px' }}>
-      <Navbar.Brand href="#home" onClick={(event) => goToHome(event)} >
+    <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar.Brand href="#home" onClick={(event) => goToHome(event)} style={{ marginRight: '50px' }}>
         <img
           src={logo}
-          height="35"
+          height="40"
           className="d-inline-block align-top"
           alt="React Bootstrap logo"
         />
-        
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
-        </Nav>
-        <Nav>
-          <Nav.Link href="#favourite">Favourite <StarFill style={{marginBottom:3}}/></Nav.Link>
+        <Nav style={{marginBottom:5}}>
+          <Nav.Link onClick={(event) => goToHome(event)} href="/"><HouseFill style={{marginBottom:3}}/> Home</Nav.Link>
+          <Nav.Link onClick={(event) => goToFavorites(event)} href="#favourites"><StarFill style={{marginBottom:3, marginLeft:5}}/> Favourite</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
