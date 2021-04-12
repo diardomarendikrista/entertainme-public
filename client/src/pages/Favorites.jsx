@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
 import { useQuery } from '@apollo/client';
+import Loader from "react-loader-spinner";
 import MovieFavoriteCard from '../components/MovieFavoriteCard';
 import { GET_FAVORITES } from '../queries';
 
@@ -22,8 +23,20 @@ export default function Favorites () {
     )
   }
 
-  if (loading) return <h1>Loading..</h1>
-  if (error) return <h1>Error!</h1>
+  if (loading) return (
+      <div class="body">
+        <div class="center-mid">
+          <Loader type="Rings" color="#C01E2B" height={80} width={80} />
+        </div>
+      </div>
+    )
+  if (error) return (
+    <div class="body">
+      <div class="center-mid">
+        <h3>Error.. please contact your administrator</h3>
+      </div>
+    </div>
+    )
   return (
     <div class="body">
       <div className="container2">

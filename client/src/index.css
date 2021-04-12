@@ -108,6 +108,13 @@ code {
   font-weight: bold;
 }
 
+.center-mid {
+  position: fixed;
+  top: 200px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .container2 {
   width: 80rem;
   margin: auto;
@@ -124,7 +131,7 @@ code {
 
 .favourite-empty {
   margin: auto;
-  margin-top: 100px;
+  margin-top: 150px;
 }
 
 .flex-container {
@@ -171,11 +178,12 @@ code {
 }
 
 .input-form {
+  background-color: #fff;
   width: 550px;
   margin: auto;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 0 10px 1px #2C3740;
+  box-shadow: 0 0 10px 1px #BCC1C7;
 }
 
 .option-btn:hover {

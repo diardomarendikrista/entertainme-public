@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { useQuery } from '@apollo/client';
 import { PlusCircle  } from 'react-bootstrap-icons';
+import Loader from "react-loader-spinner";
 import MovieCard from '../components/MovieCard';
 import TvSeries from '../components/TvSeriesCard';
 import {
@@ -20,9 +21,16 @@ export default function Home (props) {
     history.push('/addmovie');
   }
 
-  if (loading) return <h1>loading movie</h1>
-  else
-  return (
+  if (loading) {
+    return (
+      <div class="body">
+        <div class="center-mid">
+          <Loader type="Rings" color="#C01E2B" height={80} width={80} />
+        </div>
+      </div>
+    );
+  }
+  else return (
     <div class="body">
       <div className="container2">
         <div>
