@@ -56,6 +56,10 @@ export default function MovieCard (props) {
     history.push(`/editmovie/${id}`);
   }
 
+  const goDetailMovie = (id) => {
+    history.push(`/movie/${id}`);
+  }
+
   const setFavourite = (movie) => {
     const existingData = cache.readQuery({
       query: GET_FAVORITES
@@ -87,10 +91,10 @@ export default function MovieCard (props) {
     <>
       <Card className="card m-1" style={{ width: '16rem' }}>
         <div className="card-img-zoom">
-          <Card.Img className="card-img" variant="top" src={movie.poster_path} />
+          <Card.Img onClick={() => goDetailMovie(movie._id)} className="card-img" variant="top" src={movie.poster_path} />
         </div>
         <Card.Body>
-          <Card.Title><span className="card-title">{ movie.title }</span></Card.Title>
+          <Card.Title onClick={() => goDetailMovie(movie._id)}><span className="card-title">{ movie.title }</span></Card.Title>
           <Card.Text className="card-text">
             <span className="card-text-param" >Tags</span> : { formatTags(movie.tags) } <br/>
             <span className="card-text-param" >Overview</span> : { movie.overview } <br/>

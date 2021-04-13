@@ -55,6 +55,19 @@ export const GET_MOVIE_ID = gql`
   }
 `
 
+export const GET_TVSERIES_ID = gql`
+  query GetTvSeries($id: ID) {
+    tvSerie(_id: $id) {
+      _id
+      title
+      overview
+      poster_path
+      popularity
+      tags
+    }
+  }
+`
+
 export const UPDATE_MOVIE = gql`
   mutation editMovie($id: ID, $updateMovie: MovieInput) {
     editMovie(_id: $id, updateMovie: $updateMovie) {

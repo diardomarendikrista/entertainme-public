@@ -32,6 +32,11 @@ code {
   cursor: pointer;
 }
 
+.btn-favourite-detail {
+  top: 100px;
+  left: 100px;
+}
+
 .btn-favourite:active {
   transform: scale(1);
 }
@@ -118,6 +123,43 @@ code {
 .container2 {
   width: 80rem;
   margin: auto;
+}
+
+.detail {
+  display: flex;
+  flex-direction: row;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: solid 1px red;
+}
+
+.detail-img {
+  width: 300px;
+  height: 425px;
+}
+
+.detail-info {
+  margin-left: 3rem;
+  color: white;
+}
+
+.detail-overview {
+  border-bottom: solid 6px #DA1F2C;
+  padding-bottom: 5px;
+  width: 130px;
+}
+
+.detail-overview-group {
+  display: inline;
+}
+
+.detail-title {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.detail-sub {
+  font-weight: bold;
 }
 
 .favourite-title {

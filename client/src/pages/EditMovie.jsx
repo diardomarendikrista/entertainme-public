@@ -72,8 +72,8 @@ export default function EditMovie () {
 
   if (errorEditMovie) {
     return (
-      <div class="body">
-        <div class="center-mid">
+      <div className="body">
+        <div className="center-mid">
           <h3>Error.. please contact your administrator</h3>
         </div>
       </div>
@@ -81,8 +81,8 @@ export default function EditMovie () {
   }
   if (loading) {
     return (
-      <div class="body">
-        <div class="center-mid">
+      <div className="body">
+        <div className="center-mid">
           <Loader type="Rings" color="#C01E2B" height={80} width={80} />
         </div>
       </div>
@@ -90,7 +90,7 @@ export default function EditMovie () {
   }
   else
   return (
-    <div class="body">
+    <div className="body">
       <div className="input-form">
         <h3>Edit Movie</h3>
         <form onSubmit={(event) => updateExitingMovie(event)}>

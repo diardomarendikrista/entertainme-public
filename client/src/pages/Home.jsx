@@ -23,15 +23,15 @@ export default function Home (props) {
 
   if (loading) {
     return (
-      <div class="body">
-        <div class="center-mid">
+      <div className="body">
+        <div className="center-mid">
           <Loader type="Rings" color="#C01E2B" height={80} width={80} />
         </div>
       </div>
     );
   }
   else return (
-    <div class="body">
+    <div className="body">
       <div className="container2">
         <div>
           <h3 className="sub-title">Movie <button onClick={() => showAddMovie()} className="btn btn-danger"><PlusCircle style={{marginBottom:4, fontSize:20}}/> add</button></h3>

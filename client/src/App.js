@@ -10,6 +10,8 @@ import Home from './pages/Home';
 import Navbar from './components/NavBar';
 import AddMovie from './pages/AddMovie';
 import EditMovie from './pages/EditMovie';
+import DetailMovie from './pages/DetailMovie';
+import DetailTvSeries from './pages/DetailTvSeries';
 import Favorites from './pages/Favorites';
 
 function App() {
@@ -23,6 +25,12 @@ function App() {
           </Route>
           <Route path="/addmovie">
             <AddMovie />
+          </Route>
+          <Route path="/movie/:id">
+            <DetailMovie />
+          </Route>
+          <Route path="/tvseries/:id">
+            <DetailTvSeries />
           </Route>
           <Route path="/editmovie/:id">
             <EditMovie />

@@ -1,19 +1,25 @@
 import React from 'react'
 import { Card } from 'react-bootstrap';
+import { useHistory } from "react-router-dom";
 import { BookmarkStarFill } from 'react-bootstrap-icons';
 
-export default function MovieCard (props) {
+export default function TvSeriesCard (props) {
   const { tvSeries } = props;
+  const history = useHistory();
 
   const formatTags = (tags) => {
     return tags.join(', ')
+  }
+  
+  const goDetailTvSeries = (id) => {
+    history.push(`/tvseries/${id}`);
   }
 
   return (
     <>
       <Card className="card m-1" style={{ width: '16rem' }}>
         <div className="card-img-zoom">
-          <Card.Img className="card-img" variant="top" src={tvSeries.poster_path} />
+          <Card.Img onClick={() => goDetailTvSeries(tvSeries._id)} className="card-img" variant="top" src={tvSeries.poster_path} />
         </div>
         <Card.Body>
           <Card.Title><span className="card-title">{ tvSeries.title }</span></Card.Title>
