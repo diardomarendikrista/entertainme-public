@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { useQuery } from '@apollo/client';
 import { PlusCircle  } from 'react-bootstrap-icons';
-import Loader from "react-loader-spinner";
 import MovieCard from '../components/MovieCard';
+import CardSkeleton from '../components/CardSkeleton';
 import TvSeries from '../components/TvSeriesCard';
 import {
   GET_ENTERTAINME,
@@ -21,16 +21,19 @@ export default function Home (props) {
     history.push('/addmovie');
   }
 
-  if (loading) {
-    return (
-      <div className="body">
-        <div className="center-mid">
-          <Loader type="Rings" color="#C01E2B" height={80} width={80} />
+  const loadingData = () => {
+    var rows = [];
+    for (let i = 0; i < 5; i++) {
+      rows.push(
+        <div className="flex-item">
+          <CardSkeleton key={i} />
         </div>
-      </div>
-    );
+      );
+    }
+    return <>{rows}</>
   }
-  else return (
+
+  return (
     <div className="body">
       <div className="container2">
         <div>
@@ -38,6 +41,7 @@ export default function Home (props) {
         </div>
         <div className="flex-container">
           {
+            loading ? loadingData() :
             data.Movies.map(movie => (
               <div className="flex-item">
                 <MovieCard
@@ -54,6 +58,7 @@ export default function Home (props) {
         </div>
         <div className="flex-container">
           {
+              loading ? loadingData() :
             data.tvSeries.map(tvSeries => (
               <div className="flex-item">
                 <TvSeries

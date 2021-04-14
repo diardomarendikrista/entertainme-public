@@ -17,7 +17,6 @@ const movies = gql`
   }
 
   input MovieInput {
-    _id: ID
     title: String
     overview: String
     poster_path: String
